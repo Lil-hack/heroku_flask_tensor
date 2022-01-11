@@ -5,6 +5,8 @@ import os
 import random
 from flask import send_file
 import time
+import tensorflow as tf
+print(tf.__version__)
 
 @app.route('/get_image')
 def get_image():
