@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 import matplotlib as mpl
 mpl.rcParams['figure.figsize'] = (12,12)
 mpl.rcParams['axes.grid'] = False
-
+from matplotlib import pyplot
 import numpy as np
 import time
 import functools
@@ -109,7 +109,10 @@ def homepage():
     
     # Stylize the content image using the style bottleneck.
     stylized_image = run_style_transform(style_bottleneck, preprocessed_content_image)
-    
+    stylized_image = run_style_transform(style_bottleneck, preprocessed_content_image)
+
+    photo=np.reshape (stylized_image, (stylized_image.shape [1], stylized_image.shape [2], stylized_image.shape [3]))
+    pyplot.imsave("ip.png", photo)
     return """
     <h1>Hello heroku</h1>
     <p>It is currently {time}.</p>
