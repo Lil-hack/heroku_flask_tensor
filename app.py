@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, flash, request, redirect, url_for
 from datetime import datetime
 app = Flask(__name__)
 import os
@@ -85,13 +85,26 @@ def get_image():
     return send_file(filename, mimetype='image/png')
 
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def homepage():
+   if request.method == 'POST':
+        # check if the post request has the file part
+        if 'file' not in request.files:
+            flash('No file part')
+            return redirect(request.url)
+        file = request.files['file']
+        # If the user does not select a file, the browser submits an
+        # empty file without a filename.
+        if file.filename == '':
+            flash('No selected file')
+            return redirect(request.url)
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            return redirect(url_for('download_file', name=filename))
+          
     content_path = tf.keras.utils.get_file('belfry.jpg','https://storage.googleapis.com/khanhlvg-public.appspot.com/arbitrary-style-transfer/belfry-2611573_1280.jpg')
     style_path = tf.keras.utils.get_file('style23.jpg','https://storage.googleapis.com/khanhlvg-public.appspot.com/arbitrary-style-transfer/style23.jpg')
-
-    
-    
 
     the_time = datetime.now().strftime("%A, %d %b %Y %l:%M %p")
     content_image = load_img(content_path)
