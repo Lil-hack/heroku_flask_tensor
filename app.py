@@ -116,7 +116,7 @@ def homepage():
     return """
     <h1>Hello heroku</h1>
     <p>It is currently {time}.</p>
-    <img src="{{url_for('static', filename='MD.png')}}">
+
     <img src="http://loremflickr.com/600/400" />
     """.format(time=the_time)
 
