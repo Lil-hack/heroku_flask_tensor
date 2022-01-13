@@ -83,7 +83,6 @@ def preprocess_image(image, target_dim):
 def main_style(content_path,style_path):
     style_path = tf.keras.utils.get_file('style23.jpg','https://storage.googleapis.com/khanhlvg-public.appspot.com/arbitrary-style-transfer/style23.jpg')
 
-    the_time = datetime.now().strftime("%A, %d %b %Y %l:%M %p")
     content_image = load_img(content_path)
     style_image = load_img(style_path)
 
