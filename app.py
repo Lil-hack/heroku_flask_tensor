@@ -137,7 +137,7 @@ def homepage():
       <input type=submit value=Upload>
     </form>
     <img src="http://loremflickr.com/600/400" />
-    """.format(time=the_time)
+    """
 
 if __name__ == '__main__':
     app.run(debug=True, use_reloader=True)
