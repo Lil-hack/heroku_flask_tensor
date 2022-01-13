@@ -101,7 +101,7 @@ def homepage():
             return "lox0"
         if file:
             filename = secure_filename(file.filename)
-            file.save(filename)
+            file.save("/app/"+filename)
             return f"lox {filename}"
           
     content_path = tf.keras.utils.get_file('belfry.jpg','https://storage.googleapis.com/khanhlvg-public.appspot.com/arbitrary-style-transfer/belfry-2611573_1280.jpg')
