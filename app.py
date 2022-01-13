@@ -80,31 +80,7 @@ def preprocess_image(image, target_dim):
 
   return image
 
-@app.route('/get_image')
-def get_image():
-    filename = 'ip.png'
-    return send_file(filename, mimetype='image/png')
-
-
-@app.route('/', methods=['GET', 'POST'])
-def homepage():
-    if request.method == 'POST':
-        # check if the post request has the file part
-        if 'file' not in request.files:
-            flash('No file part')
-            "loxx"
-        file = request.files['file']
-        # If the user does not select a file, the browser submits an
-        # empty file without a filename.
-        if file.filename == '':
-            flash('No selected file')
-            return "lox0"
-        if file:
-            filename = secure_filename(file.filename)
-            file.save("/app/"+filename)
-            return f"lox {filename}"
-          
-    content_path = tf.keras.utils.get_file('belfry.jpg','https://storage.googleapis.com/khanhlvg-public.appspot.com/arbitrary-style-transfer/belfry-2611573_1280.jpg')
+def main_style(content_path,style_path):
     style_path = tf.keras.utils.get_file('style23.jpg','https://storage.googleapis.com/khanhlvg-public.appspot.com/arbitrary-style-transfer/style23.jpg')
 
     the_time = datetime.now().strftime("%A, %d %b %Y %l:%M %p")
@@ -127,6 +103,33 @@ def homepage():
 
     photo=np.reshape (stylized_image, (stylized_image.shape [1], stylized_image.shape [2], stylized_image.shape [3]))
     pyplot.imsave("ip.png", photo)
+    
+@app.route('/get_image')
+def get_image():
+    filename = 'ip.png'
+    return send_file(filename, mimetype='image/png')
+
+
+@app.route('/', methods=['GET', 'POST'])
+def homepage():
+    if request.method == 'POST':
+        # check if the post request has the file part
+        if 'file' not in request.files:
+            flash('No file part')
+            "loxx"
+        file = request.files['file']
+        # If the user does not select a file, the browser submits an
+        # empty file without a filename.
+        if file.filename == '':
+            flash('No selected file')
+            return "lox0"
+        if file:
+            filename = secure_filename(file.filename)
+            file.save("/app/"+filename)
+            main_style("/app/"+filename,'lox')
+            return  redirect(request.url+'get_image')
+          
+    
     return """
     <h1>Hello heroku</h1>
     <p>It is currently {time}.</p>
