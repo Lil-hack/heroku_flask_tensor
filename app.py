@@ -81,7 +81,7 @@ def preprocess_image(image, target_dim):
   return image
 
 def main_style(content_path,style_path):
-    style_path = tf.keras.utils.get_file('style23.jpg','https://storage.googleapis.com/khanhlvg-public.appspot.com/arbitrary-style-transfer/style23.jpg')
+    style_path = tf.keras.utils.get_file('style23.jpg','https://static.zerochan.net/Cotton_Mellow.full.2647466.jpg')
 
     content_image = load_img(content_path)
     style_image = load_img(style_path)
