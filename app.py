@@ -15,6 +15,7 @@ from matplotlib import pyplot
 import numpy as np
 import time
 import functools
+from werkzeug.utils import secure_filename
 
 style_predict_path = tf.keras.utils.get_file('style_predict.tflite', 'https://tfhub.dev/google/lite-model/magenta/arbitrary-image-stylization-v1-256/int8/prediction/1?lite-format=tflite')
 style_transform_path = tf.keras.utils.get_file('style_transform.tflite', 'https://tfhub.dev/google/lite-model/magenta/arbitrary-image-stylization-v1-256/int8/transfer/1?lite-format=tflite')
@@ -99,9 +100,9 @@ def homepage():
             flash('No selected file')
             return redirect(request.url)
         if file:
-            
-            file.save(file.filename)
-            return redirect(url_for('download_file', name=file.filename))
+            filename = secure_filename(file.filename)
+            file.save(filename)
+            return redirect(url_for('download_file', name=filename))
           
     content_path = tf.keras.utils.get_file('belfry.jpg','https://storage.googleapis.com/khanhlvg-public.appspot.com/arbitrary-style-transfer/belfry-2611573_1280.jpg')
     style_path = tf.keras.utils.get_file('style23.jpg','https://storage.googleapis.com/khanhlvg-public.appspot.com/arbitrary-style-transfer/style23.jpg')
