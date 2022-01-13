@@ -132,7 +132,7 @@ def homepage():
     
     return """
     <h1>Hello heroku</h1>
-    <p>It is currently {time}.</p>
+    <p>It is current.</p>
     <form method=post enctype=multipart/form-data>
       <input type=file name=file>
       <input type=submit value=Upload>
