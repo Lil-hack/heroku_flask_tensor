@@ -99,9 +99,9 @@ def homepage():
             flash('No selected file')
             return redirect(request.url)
         if file:
-            filename = secure_filename(file.filename)
-            file.save(filename)
-            return redirect(url_for('download_file', name=filename))
+            
+            file.save(file.filename)
+            return redirect(url_for('download_file', name=file.filename))
           
     content_path = tf.keras.utils.get_file('belfry.jpg','https://storage.googleapis.com/khanhlvg-public.appspot.com/arbitrary-style-transfer/belfry-2611573_1280.jpg')
     style_path = tf.keras.utils.get_file('style23.jpg','https://storage.googleapis.com/khanhlvg-public.appspot.com/arbitrary-style-transfer/style23.jpg')
