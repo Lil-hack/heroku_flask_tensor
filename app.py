@@ -81,7 +81,7 @@ def preprocess_image(image, target_dim):
   return image
 
 def main_style(content_path,style_path):
-    style_path = tf.keras.utils.get_file('style23.jpg','https://static.zerochan.net/Cotton_Mellow.full.2647466.jpg')
+    style_path = tf.keras.utils.get_file('style23.jpg','https://img.freepik.com/free-vector/neon-lights-background-theme_52683-44625.jpg?size=626&ext=jpg')
 
     content_image = load_img(content_path)
     style_image = load_img(style_path)
